@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Εργασία WWW</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script2.js" defer></script>
+</head>
+
+<body>
+    <div class="grid">
+        
+        <header style="text-align: center; font-size: 20px;">Social Waste</header>
+        
+        <nav style="display: flex; justify-content: space-evenly;">
+
+            <button class="Button" id="0" onclick="displaySide('biography',this.id)">Βιογραφία</button>
+            <button class="Button" id="1" onclick="displaySide('photographs',this.id)">Φωτογραφίες</button>
+            <button class="Button" id="2" onclick="displaySide('discography',this.id)">Δισκογραφία</button>
+            <button class="Button" id="3" onclick="displaySide('links',this.id)">Σύνδεσμοι</button>
+            <button class="Button" id="4" onclick="displaySide('manage',this.id)">Διαχείριση</button>
+        
+        </nav>
+
+        <aside class="SideMenu">
+        
+            <div id="biography" style="display: none;">
+
+                <button class="Button Side" onclick="getInformation('File1.txt')">Ιστορικά Στοιχεία</button>
+                <button class="Button Side" onclick="getInformation('File2.txt')">Ζωντανές Εμφανίσεις</button>
+                <button class="Button Side" onclick="getInformation('File3.txt')">Μουσική</button>
+
+            </div>
+
+            <div class="image-container" id="photographs" style="display: none;">
+                
+                <button class="Button Side" onclick="getImages('Set1')">Παρασκευή 22 Σεπτεμβρίου 2017<br>Πάρκο Γουδή (Αθήνα)</button>
+                <button class="Button Side" onclick="getImages('Set2')">Resistance 2016<br>Γεωπονική σχολή (Αθήνα)</button>
+                <button class="Button Side" onclick="getImages('Set3')">Φεστιβάλ ενάντια στην ιδιωτικοποίηση του νερού<br> Α.Π.Θ Θεσσαλονίκη (2013)</button>
+
+            </div>
+
+            <div id="discography" style="display: none;">
+
+                <button class="Button Side" onclick="getDiscNoForm('Borders.json')">Σύνορα</button>
+                <button class="Button Side" onclick="getDiscNoForm('TheMediterraneanHipHop.json')">Το Hip Hop της Μεσογείου</button>
+                <button class="Button Side" onclick="getDiscNoForm('Set3')">Με μια πειρατική γαλέρα</button>
+
+            </div>
+
+            <div id="links" style="display: none;">
+                
+                <button class="Button Side" onclick="getLinksNoForm('videos')">Video</button>
+                <button class="Button Side" onclick="getLinksNoForm('live')">Live</button>
+                <button class="Button Side" onclick="getLinksNoForm('information')">Information</button>
+                
+            </div>
+
+            <div id="manage" style="display: none;">
+                
+                <button class="Button Side" onclick="showLogin()">Σύνδεση</button>
+                <button class="Button Side" onclick="logout()">Αποσύνδεση</button>
+                <button class="Button Side" id="ManageSongs" onclick="getDiscFiles()" style="display: none">Διαχείριση Έργων</button>
+                <button class="Button Side" id="ManageLinks" onclick="showTables()" style="display: none">Διαχείριση Συνδέσμων</button>
+
+            </div>
+        
+        </aside>
+        
+        <main id="mainMenu" class = "mainMenu">
+            
+            <div id="BiographyContainerID" class="BiographyContainer" style="display: none;">    
+            </div>
+
+            <div id="ImageContainerID" class="imageContainer" style="display: none;">
+            </div>
+
+            <div id="DiscographyContainerID" class="DiscographyContainer" style="display: none;">
+            </div>
+
+            <div id="LinksContainerID" class="LinksContainer" style="display: none;">
+            </div>
+
+            <div id="LoginFormID" class="LoginFormContainer" style="display: none;">
+
+                <label for="username">Username</label>
+                <input type="text" name="username"/>
+                <label for="password">Password</label>
+                <input type="password" name="password"/>
+                <button type="submit" onclick="Login()">Submit</button>
+                <div id="LoggedInStatus" style="text-align: center;">Logged Out</div>
+                
+            </div>
+
+            <div id="songForm" class="LoginFormContainer" style="display: none; margin: 25px auto;">
+
+                <label for="id">Id</label>
+                <input name="id" type="number" />
+                <label for="title">Title</label>
+                <input name="title" type="text" />
+                <label for="duration">Duration</label>
+                <input name="duration" type="text" />
+                <label for="artist">Artist</label>
+                <input name="artist" type="text" />
+
+            </div>
+
+            <div id="songToolbar" style = "display: none; max-width: 200px; margin: 10px auto; gap: 10px;">
+
+                <button id="AddSong" onclick="addSong()">Add Song</button>
+                <button id="UpdateSong" onclick="updateSong()">Update Song</button>
+                <button id="DeleteSong" onclick="deleteSong()">Delete Song</button>
+
+            </div>
+
+            <div id="linkForm" class="LoginFormContainer" style="display: none; margin: 25px auto;">
+
+                <label for="id">Id</label>
+                <input name="id" type="number" />
+                <label for="link">Link</label>
+                <input name="link" type="text" />
+                <label for="description">Description</label>
+                <input name="description" type="text" />
+
+            </div>
+
+            <div id="linkToolbar" style = "display: none; max-width: 200px; margin: 10px auto; gap: 10px;">
+
+                <button onclick="addLink()">Add Link</button>
+                <button onclick="updateLink()">Update Link</button>
+                <button onclick="deleteLink()">Delete Link</button>
+
+            </div>
+
+        </main>    
+        
+        <footer>Τσιολάκης Γεώργιος-Δαναός</footer>
+
+    </div>
+</body>
+
+</html>
