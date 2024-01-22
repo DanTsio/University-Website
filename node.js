@@ -203,6 +203,7 @@ const showResults = (response, error, results) => {
     console.log(error);
     results.status(200).json([]);
   }
+  console.log("tried to get results");
   response.status(200).json(results.rows);
 };
 

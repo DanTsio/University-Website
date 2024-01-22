@@ -5,12 +5,9 @@
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
     "Start": {
-      "name": "My Website",
-      "command": "Node node.js",
-      "runAtStart": true,
-      "preview": {
-        "port": 3000
-      }
+      "name": "Initialize",
+      "command": "node node.js",
+      "runAtStart": true
     }
   }
 }
