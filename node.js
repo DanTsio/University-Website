@@ -266,12 +266,6 @@ app.post("/api/Links/:Table", (req, res) => addLink(req, res));
 app.put("/api/Links/:Table/:id", (req, res) => updateLink(req, res));
 app.delete("/api/Links/:Table/:id", (req, res) => deleteLink(req, res));
 
-<<<<<<< HEAD
 app.listen(port, function () {
   console.log("Listening at port:" + port);
 });
-=======
-app.listen(port, function() {
-  console.log("Listening at port:" + port);
-});
->>>>>>> 99923b783f5c35e73952ed29e3c59f690f0d80cd
