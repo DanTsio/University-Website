@@ -248,5 +248,5 @@ app.put('/api/Links/:Table/:id', (req, res) => updateLink(req, res));
 app.delete('/api/Links/:Table/:id', (req, res) => deleteLink(req, res));
 
 app.listen(port, function() {
-    console.log("Listening on port 3000");
+    console.log("Listening at port:" + port);
 });
