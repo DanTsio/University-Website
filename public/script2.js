@@ -2,29 +2,28 @@ let jwtToken;
 
 var activeFile, activeTable;
 
-function displaySide(ID, buttonID) {
+function displaySide(asideID, buttonID) {
 
     clearMain();
 
-    // Get all div elements inside the aside
+    // Παίρνω όλα τα div στοιχεία που είναι μέσα στο aside και όλα τα στοιχεία τύπου button που βρίσκονται στο nav
     var divs = document.querySelectorAll('aside > div');
     var buttons = document.querySelector('nav').getElementsByTagName('button');
-    
+
+    // Αφού το button έχανε την κατάσταση focus που είχα θέσει στο css αρχείο, αλλάζω το background
+    // χρώμα του button που έχει επιλεχθεί για να έχει το ίδιο effect 
     for (let i = 0; i < 5; i++) {
-        buttons.item(i).style.backgroundColor = '#deb887';
         buttons.item(i).style = '';
     }
-    
     buttons.item(buttonID).style = 'background-color: #915e00; color: white;';
-    
-    // Hide all divs
+
+    // Θέτω το display σε none για όλα τα div στοιχεία
     for (let i = 0; i < divs.length; i++) {
         divs[i].style.display = 'none';
     }
-    
-    // Display the div associated with the clicked button
-    var selectedDiv = document.getElementById(ID);
-    selectedDiv.style.display = 'block';
+
+    // Και εμφανίζω μόνο αυτό που επιλέχθηκε
+    document.getElementById(asideID).style.display = 'block';
 }
 
 function clearMain(){
@@ -35,6 +34,9 @@ function clearMain(){
         divs[i].style.display = 'none';
         divs[i].innerHTML = '';
     }
+
+    // Αφού έχουμε HTML κώδικα στα τελευταία 5 div στοιχεία του main δεν θέλουμε να εκτελέσουμε innerHTML = '' σε όλα τα div
+    // έτσι θέτω το display = 'none' για κάθε div στοιχείο το οποίο θέλω να διατηρήσω τον HTML κώδικα
 
     document.getElementById('LoginFormID').style.display = 'none'
     document.getElementById('songForm').style.display = 'none'
@@ -56,13 +58,13 @@ function getImages(imageSet) {
     
     clearImages();
 
-    fetch(`api/images/${imageSet}`) // Fetch the list of images from your server
+    fetch(`api/images/${imageSet}`) 
         .then(response => response.json())
         .then(imageFiles => {
             imageFiles.forEach(file => {
                 const img = document.createElement('img');
-                img.src = `/images/${imageSet}/${file}`; // Adjust the path based on your server setup
-                img.classList.add('image'); // Optional: Add a class for styling
+                img.src = `/images/${imageSet}/${file}`; 
+                img.classList.add('image'); 
                 Menu.appendChild(img);
             });
         })
@@ -78,10 +80,9 @@ function getInformation(fileName) {
         return response.text();
     })
     .then(text => {
-        // Displaying the fetched data in the div element
         const contentDiv = document.getElementById('BiographyContainerID');
         contentDiv.style.display = 'block';
-        contentDiv.textContent = text; // Set the text content of the div
+        contentDiv.textContent = text;
     })
 }
 
@@ -115,8 +116,6 @@ function getFormData() {
 
 function showDiscography(Album) {
 
-    // clearMain();
-
     const DiscContainer = document.getElementById("DiscographyContainerID");
 
     if( !(jwtToken == "" || jwtToken == undefined) ) {
@@ -144,7 +143,6 @@ function showDiscography(Album) {
 }
 
 function showLogin(){
-
     clearMain();
     document.getElementById('LoginFormID').style.display = 'flex'
 }
@@ -182,7 +180,7 @@ function Login() {
                 document.getElementById("ManageLinks").style.display = 'block';
             }
         })
-        .catch(e => showError(e));
+        .catch(e => console.log("Failed to login"));
 }
 
 function getData() {
@@ -231,13 +229,10 @@ function getDiscFiles(){
                 const button = document.createElement('button');
                 button.classList = 'Button Side';
                 button.style = 'max-width: 500px;display: flex; flex-direction:column; margin:10px auto;';
-                button.textContent = file; // Set button label to file name
+                button.textContent = file;
                 button.addEventListener('click', () => {
-                // Handle button click action, e.g., open the file or perform an action
                 activeFile = file;
-                Menu.addEventListener("click", selectSong);
                 getDisc(file);
-                // You can modify this to perform an action with the file
             });
             Menu.appendChild(button);
         });
@@ -318,8 +313,6 @@ function getLinks(tableName) {
 
 function showLinks(Links) {
 
-    // clearMain();
-
     const LinkContainer = document.getElementById("LinksContainerID");
 
     if( !(jwtToken == "" || jwtToken == undefined) ) {
@@ -339,7 +332,6 @@ function showLinks(Links) {
             <td><a href="${aLink.link}">${aLink.link}</a></td>
             <td>${aLink.description}</td>
             </tr>`;
-    
     }
     Table += "</table>";
     document.getElementById("LinksContainerID").innerHTML = Table;
@@ -364,7 +356,6 @@ function showTables() {
         button.textContent = tables[i];
         button.addEventListener('click', () => {
         activeTable = tables[i];
-        Menu.addEventListener("click", selectLink);
         getTable(tables[i]);
         });
         Menu.appendChild(button)

@@ -4,13 +4,13 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const app = express();
 app.use(express.json());
-const port = 5432 || 3000;
+const port = 3000;
 const fs = require("fs");
 const { Client, Pool } = require("pg");
 
 app.use(bodyPraser.urlencoded({ extended: false }));
 
-const users = { "": "" };
+const users = { "administrator": "adminpass1234" };
 
 const credentials = {
   user: "admin",
@@ -30,7 +30,7 @@ app.post("/login", (req, res) => {
       res.status(200).json(token);
     });
   } else {
-    res.sendStatus(401);
+    res.sendStatus(200);
   }
 });
 
@@ -55,13 +55,11 @@ app.get("/api/data", isAuthenticated, function (req, res) {
 
 app.get("/logout", (req, res) => {
   res.clearCookie("username");
-  res.redirect("/");
 });
 
 app.get("/api/images/:Set", (req, res) => {
   fs.readdir(`public/images/${req.params.Set}`, (err, fileNames) => {
     if (err) {
-      // Handle the error, send an error response
       res.status(500).send("Error reading directory");
       return;
     }
@@ -90,7 +88,6 @@ app.get("/api/Discography/:filename", (req, res) => {
 app.get("/api/Discography", (req, res) => {
   fs.readdir(`public/Discography`, (err, fileNames) => {
     if (err) {
-      // Handle the error, send an error response
       res.status(500).send("Error reading directory");
       return;
     }
@@ -194,16 +191,13 @@ function deleteSong(req, res) {
 app.get("/api/Discography/:filename/:id", (req, res) => getSong(req, res));
 app.post("/api/Discography/:filename", (req, res) => addSong(req, res));
 app.put("/api/Discography/:filename/:id", (req, res) => updateSong(req, res));
-app.delete("/api/Discography/:filename/:id", (req, res) =>
-  deleteSong(req, res),
-);
+app.delete("/api/Discography/:filename/:id", (req, res) => deleteSong(req, res));
 
 const showResults = (response, error, results) => {
   if (error) {
     console.log(error);
     results.status(200).json([]);
   }
-  console.log("tried to get results");
   response.status(200).json(results.rows);
 };
 
@@ -261,11 +255,10 @@ async function deleteLink(req, res) {
 }
 
 app.get("/api/Links/:Table", (req, res) => getLinks(req, res));
-app.get("/api/Links/:Table/:id", (req, res) => getLinks(req, res));
 app.post("/api/Links/:Table", (req, res) => addLink(req, res));
 app.put("/api/Links/:Table/:id", (req, res) => updateLink(req, res));
 app.delete("/api/Links/:Table/:id", (req, res) => deleteLink(req, res));
 
 app.listen(port, function () {
-  console.log("Listening at port:" + port);
+  console.log("Listening on port:" + port);
 });
