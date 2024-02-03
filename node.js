@@ -14,11 +14,11 @@ const users = [];
 users[process.env.username] = process.env.password;
 
 const credentials = {
-  user: "admin",
-  host: "localhost",
-  database: "api",
-  password: "Admin1234",
-  port: 5432,
+  user: process.env.user,
+  host: process.env.host,
+  database: process.env.database,
+  password: process.env.databasepassword,
+  port: process.env.databaseport,
 };
 
 app.use(express.static(__dirname + "/public"));
