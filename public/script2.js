@@ -180,7 +180,7 @@ function Login() {
                 document.getElementById("ManageLinks").style.display = 'block';
             }
         })
-        .catch(e => console.log("Failed to login"));
+        .catch(e => alert("Failed to login"));
 }
 
 function getData() {
@@ -215,9 +215,7 @@ function selectSong(event) {
 function getDiscFiles(){
 
     clearMain();
-
-    document.getElementById('LoginFormID').style.display = 'none'
-
+    
     const Menu = document.getElementById('DiscographyContainerID');
     
     Menu.style.display = 'block';
@@ -342,8 +340,6 @@ function showTables() {
     tables = ['videos','live','information']
 
     clearMain();
-
-    document.getElementById('LoginFormID').style.display = 'none'
 
     const Menu = document.getElementById('LinksContainerID');
 

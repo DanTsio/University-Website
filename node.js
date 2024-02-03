@@ -205,6 +205,10 @@ async function getLinks(req, res) {
   const pool = new Pool(credentials);
   const text = `SELECT * FROM ${req.params.Table}`;
   pool.query(text, (error, results) => {
+    if (error) {
+      console.log(error);
+      return;
+    }
     showResults(res, error, results);
   });
 }
@@ -220,6 +224,7 @@ async function addLink(req, res) {
   return pool.query(text, values, (error, results) => {
     if (error) {
       console.log(error);
+      return;
     }
     res.status(200).json(`Link added with ID: ${results.rows[0].id}`);
   });
