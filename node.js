@@ -10,7 +10,8 @@ const { Client, Pool } = require("pg");
 
 app.use(bodyPraser.urlencoded({ extended: false }));
 
-const users = { "administrator": "adminpass1234" };
+const users = [];
+users[process.env.username] = process.env.password;
 
 const credentials = {
   user: "admin",
