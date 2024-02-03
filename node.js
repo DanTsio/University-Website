@@ -11,14 +11,14 @@ const { Client, Pool } = require("pg");
 app.use(bodyPraser.urlencoded({ extended: false }));
 
 const users = [];
-users[process.env.username] = process.env.password;
+users[process.env.admin_user] = process.env.admin_pass;
 
 const credentials = {
-  user: process.env.user,
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.databasepassword,
-  port: process.env.databaseport,
+  user: process.env.database_user,
+  host: process.env.database_host,
+  database: process.env.database_name,
+  password: process.env.database_pass,
+  port: process.env.database_port,
 };
 
 app.use(express.static(__dirname + "/public"));
